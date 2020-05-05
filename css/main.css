@@ -1,0 +1,62 @@
+*{margin:0;
+padding:0;
+}
+body{
+font-family:calibri;
+font-size:16px;
+
+}
+h2{
+font-family:calibri,sans-serif;
+color:#ffffff;
+padding:10px;
+background:#2da2d8;
+font-size:18px;
+}
+h3{
+text-align:center;
+padding:10px;
+background:#2da2d8;
+font-size:18px;
+color:#ffffff;
+}
+
+.chatapp-wrapper{
+width:768px;
+position:absolute;
+top:20%;
+left:50%;
+transform:translate(-50%,-20%);
+box-shadow:1px 1px 10px 1px #eee;
+display:flex;
+padding:0px;
+flex-wrap:wrap;
+height:480px;
+}
+.side-panel{
+flex:1 0 200px;
+height:auto;
+}
+.search-section{
+padding:10px;
+}
+.search_friends{
+padding:10px;
+border:none;
+border-bottom:1px solid #eee;
+width:180px;
+
+}
+.chat-section{
+flex:1 0 350px;
+border-left:2px solid #eee;
+height:auto;
+}
+.contacts{
+padding:10px;
+border-bottom:1px solid #eee;
+margin:15px;
+font-family:calibri;
+
+
+}
