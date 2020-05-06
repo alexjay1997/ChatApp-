@@ -6,6 +6,18 @@ font-family:calibri;
 font-size:16px;
 
 }
+
+.container{
+border:px solid green;
+width:1024px;
+position:relative;
+top:0%;
+left:50%;
+transform: translate(-50%,0%);
+height:auto;
+padding:10px;
+
+}
 h2{
 font-family:calibri,sans-serif;
 color:#ffffff;
@@ -20,14 +32,37 @@ background:#2da2d8;
 font-size:18px;
 color:#ffffff;
 }
+.top-header{
+    border:px solid yellow;
+    background:#2da2d8;
+    color:#ffffff;    
+}
+.top-content{
+    
+display:flex;
+flex-wrap:wrap;
 
+}
+.logo{
+    border:px solid blue;
+flex:1 0 250px;
+width:250px;
+box-sizing:border;}
+.user{
+    flex:1 0 350px;
+    width:250px;
+    box-sizing:border;
+    border:px solid red;
+    line-height: 25px;
+
+}
 .chatapp-wrapper{
 width:768px;
-position:absolute;
-top:20%;
+position: relative;;
+top:0px;
 left:50%;
-transform:translate(-50%,-20%);
-box-shadow:1px 1px 10px 1px #eee;
+transform: translate(-50%,0%);
+box-shadow:1px 1px 10px 1px #ccc;
 display:flex;
 padding:0px;
 flex-wrap:wrap;
