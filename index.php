@@ -24,6 +24,13 @@ $current_user = $_SESSION['id'];
 $read_login_user =$conn->select_details($current_user);
 $fetch_data=mysqli_fetch_assoc($read_login_user);
 
+//select message
+
+$conn_getmessage = new Select_class();
+$contact_id = $_GET['contact_id'];
+$current_user = $_SESSION['id'];
+$read_message = $conn_getmessage->get_messages($contact_id,$current_user);
+
 
 
 ?>
@@ -76,15 +83,34 @@ $fetch_data=mysqli_fetch_assoc($read_login_user);
       </div>
         <div class="chat-section">
          	<h3>Chats</h3>
-			 <div class="chats_wrapper">
+			 <div class="chats_wrapper" style="overflow-y:auto;border:0px solid yellow;height:365px;padding:5px;">
+
+				 <?php
+				 while($fetch_message=mysqli_fetch_assoc($read_message)){
+				 
+				
+				
+				 ?>
+					 <div class="message" style="background:#2da2d8;color:white;width:300px;height:auto;margin:10px;border-radius:20px;padding:15px;">
+					 <?php echo $fetch_message['message']."<br>";?>
+					 <?php	echo $fetch_message['fname']." ".$fetch_message['lname']."<br>";?>
+					 <?php echo $fetch_message['sent_on']."<br>";?>
+				 </div>
+				 <?php
+				 }
+				 ?>
+				 	
 				</div><br>
 				<div class="type_sect" style="position:fixed;bottom:0;padding:20px;">
-					<form method="post" action="functions/send_message.func.php">
-						<div contenteditable="true" type="text" name="type_message" data-placeholder="Message..." style="padding:7px;width:300px;height:20px;overflow:auto;border:1px solid #ccc;float:left;"></div>
+
+					<form method="post" action="functions/send_message.func.php?contact_id=<?php echo $_GET['contact_id'];?>">
+
+						<textarea type="text" name="type-message" placeholder="Message..." style="padding:7px;width:300px;height:20px;overflow:auto;border:1px solid #ccc;float:left;"></textarea>
 						<input type="submit" name="send-btn" value="send" style="border:none;background:#2da2d8;color:#ffffff;padding:10px;width:100px;"/>
+					
 					</form>
 				</div>
-         </div>   
+         </>   
     </div>	 
 	</div>
 </div>
