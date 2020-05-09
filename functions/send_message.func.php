@@ -15,7 +15,7 @@ $insert_message = $conn_Insert->add_message($message,$sender_id,$reciever_id);
 if($insert_message){
 
 echo  "<script>alert('Message Sent!');</script>";
-echo  "<script>window.location.href='../index.php';</script>";
+echo "<script>window.location.href='../index.php?contact_id=$reciever_id';</script>";
 
 }
 

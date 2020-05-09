@@ -31,7 +31,7 @@ else{
 
  $row=mysqli_fetch_assoc($read_user);
  $_SESSION['id']=$row['user_id'];
- header('location:../index.php');
+ echo "<script>window.location.href='../index.php?contact_id=$_SESSION[id]';</script>";
 
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2020 at 08:08 PM
+-- Generation Time: May 09, 2020 at 07:53 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -33,7 +33,7 @@ CREATE TABLE `tbl_chat` (
   `message` varchar(5000) NOT NULL,
   `sender_id` int(20) NOT NULL,
   `reciever_id` int(20) NOT NULL,
-  `sent_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `sent_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -41,10 +41,10 @@ CREATE TABLE `tbl_chat` (
 --
 
 INSERT INTO `tbl_chat` (`chat_id`, `message`, `sender_id`, `reciever_id`, `sent_on`) VALUES
-(18, 'hey!', 1, 3, '2020-05-08 18:04:20'),
-(19, 'yow!', 3, 1, '2020-05-08 18:05:08'),
-(20, 'hey !', 1, 2, '2020-05-08 18:05:42'),
-(21, 'hellow', 2, 3, '2020-05-08 18:06:23');
+(36, 'hey hamilton! ', 1, 2, '2020-05-10 00:09:46'),
+(37, 'why ?', 2, 1, '2020-05-10 00:10:14'),
+(38, 'hello janno', 1, 3, '2020-05-10 00:10:41'),
+(39, 'hi', 3, 1, '2020-05-10 00:10:54');
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_chat`
 --
 ALTER TABLE `tbl_chat`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`

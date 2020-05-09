@@ -7,7 +7,6 @@ if(isset($_SESSION['id']) && $_SESSION['id']==true){
 
 }
 
-
 else{
 header('location:login.page.php');	
 }
@@ -31,8 +30,10 @@ $contact_id = $_GET['contact_id'];
 $current_user = $_SESSION['id'];
 $read_message = $conn_getmessage->get_messages($contact_id,$current_user);
 
-
-
+$conn_getContact_name =new Select_class();
+$contact_name = $_GET['contact_id'];
+$read_contact_name =$conn_getContact_name->get_contact_name($contact_name);
+$fetch_current_contact_name=mysqli_fetch_assoc($read_contact_name);
 ?>
 <!Doctype html>
 <html>
@@ -82,19 +83,22 @@ $read_message = $conn_getmessage->get_messages($contact_id,$current_user);
 		?>
       </div>
         <div class="chat-section">
-         	<h3>Chats</h3>
+			 <h3>Chats
+			 <?php echo "<label style='color:#a5e1ff;font-size:16px;'>- ".$fetch_current_contact_name['fname']." ".$fetch_current_contact_name['lname']."</label>";?>
+			 </h3>
+			 
 			 <div class="chats_wrapper" style="overflow-y:auto;border:0px solid yellow;height:365px;padding:5px;">
 
 				 <?php
 				 while($fetch_message=mysqli_fetch_assoc($read_message)){
-				 
-				
+					$date_sent = date_create($fetch_message['sent_on']);
+					
 				
 				 ?>
-					 <div class="message" style="background:#2da2d8;color:white;width:300px;height:auto;margin:10px;border-radius:20px;padding:15px;">
+					 <div class="message" style="background:#3bbbf9;color:white;width:300px;height:auto;margin:10px;border-radius:20px;padding:15px;">
 					 <?php echo $fetch_message['message']."<br>";?>
-					 <?php	echo $fetch_message['fname']." ".$fetch_message['lname']."<br>";?>
-					 <?php echo $fetch_message['sent_on']."<br>";?>
+					 <?php	echo "<label style='color:#1d1d1d;'>from:"." " .$fetch_message['fname']." ".$fetch_message['lname']."<br></label>";?>
+					 <?php echo date_format($date_sent, 'd/m/Y  g:i A')."<br>";?>
 				 </div>
 				 <?php
 				 }
@@ -110,7 +114,7 @@ $read_message = $conn_getmessage->get_messages($contact_id,$current_user);
 					
 					</form>
 				</div>
-         </>   
+         </h4>   
     </div>	 
 	</div>
 </div>
