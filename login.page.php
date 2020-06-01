@@ -12,7 +12,7 @@
             <h2>Login</h2><br>
             <input type="text" name="username" placeholder="Username" /><br><br>
             <input type="password" name="password" placeholder="Password" /><br><br>
-            <input type="submit" name="login-btn" value="Login" />
+            <input type="submit" name="login-btn" value="Login" />&nbsp;&nbsp;<a href="sign_up.page.php">Sign-Up</a>
         </form>
     </div>
 </body>

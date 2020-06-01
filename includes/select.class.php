@@ -10,6 +10,16 @@ public function __construct(){
 
 }
 
+//check if already exist user? 
+
+public function check_user($username){
+	
+	$query="Select * from tbl_users WHERE username='$username'";
+	$result =mysqli_query($this->connection,$query);
+	
+	return $result;
+}
+
 public function select_contacts(){
 
 	$query="Select * from tbl_users";
@@ -49,6 +59,7 @@ $query ="Select tbl_chat.message, tbl_chat.sender_id, tbl_chat.reciever_id,
 		AND tbl_chat.reciever_id = '".$contact_id."')
 		OR (tbl_chat.sender_id = '".$contact_id."'
 		AND tbl_chat.reciever_id = '".$current_user."')
+		ORDER BY sent_on
 		
 		";
 

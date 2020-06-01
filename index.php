@@ -92,13 +92,70 @@ $fetch_current_contact_name=mysqli_fetch_assoc($read_contact_name);
 				 <?php
 				 while($fetch_message=mysqli_fetch_assoc($read_message)){
 					$date_sent = date_create($fetch_message['sent_on']);
+				
+			
+
+					$sender_names=  "<label style='color:#eee;'>from:"." " .$fetch_message['fname']." ".$fetch_message['lname']."</label><br>"; 
+					$messages = $fetch_message['message'];
+					$sent_messages_date = "<section style='text-align:right;border:px solid red;max-width:100%;font-size:14px;'>". date_format($date_sent, 'd/m/Y  g:i A')."</section>";
+					
+								 
+				 ?>
+					 <div class="message" style="overflow:hidden;background:eaeaeaa3;color:#484848;width:max-width:100%;;height:auto;margin:10px;border-bottom:1px solid #ccc;padding:15px;">
+					 <?php
+					
+						// for alternate message design  ---****** start ***** ----
+					 $current_user_sender ="<label style='line-height:30px;color:#0e2a7f;font-style:italic;'>You:<br></label>";
+					 // condiiton if sender is equal to current user then background color of the message is Blue 
+					 
+					 if($fetch_message['sender_id'] == $current_user){
+						
+						$messages_wrapper_start = "<div style='float:right;padding:10px;max-width:70%;overflow:hidden;border-radius:15px;background:#2da2d8'>";
+					
+						$messages = "<div style='color:#ffffff;padding:10px;float:right;max-width:100%;overflow:hidden;padding:10px;'>". $current_user_sender.$messages."</div></br>";
+						
+						$sent_messages_date = "<div style='float:right;margin:5px;max-width:100%;'>".$sent_messages_date."</div>";
+						$messages_wrapper_end = "</div>";
+					 }
+					 // condiiton else if sender is equal to current contact choice then background is green
+					 else if($fetch_message['sender_id'] == $contact_id){
+ 
+					   $messages_wrapper_start = "<div style='float:left;padding:20px;max-width:70%;overflow:hidden;border-radius:15px;background:#73c263;'>";
+						$messages = "<div style='color:#ffffff;padding:10px;float:left;max-width:100%;'>".$messages."</div></br></br>";
+						$sent_messages_date = "<div style='float:left;margin:px;max-width:100%;'>".$sent_messages_date."</div>";
+						$messages_wrapper_end = "</div>";
+					 }
+
+						 // for alternate message design  ---****** end  ***** ----
+						 
+					 // echo messages -------- start ---------------
+				
+				
+					 echo $messages_wrapper_start.$sender_names;
+
+					 // put smiley if message is  == :) ---------------- start ---------------
+					 if ($fetch_message['message']==':)') {
+						
+						echo "<img src ='emoji/smile.png' style='width:25px;'/> ";
+						 // put smiley if message is  == :) ---------------- end ---------------
+					
+					}
+					if ($fetch_message['message']==':D') {
+						
+						echo "<img src ='emoji/laugh.png' style='width:25px;'/> ";
+						 // put smiley if message is  == :) ---------------- end ---------------
+					
+					}
 					
 				
-				 ?>
-					 <div class="message" style="background:#3bbbf9;color:white;width:300px;height:auto;margin:10px;border-radius:20px;padding:15px;">
-					 <?php echo $fetch_message['message']."<br>";?>
-					 <?php	echo "<label style='color:#1d1d1d;'>from:"." " .$fetch_message['fname']." ".$fetch_message['lname']."<br></label>";?>
-					 <?php echo date_format($date_sent, 'd/m/Y  g:i A')."<br>";?>
+					 echo $messages."<br>";
+					
+					 echo $sent_messages_date.$messages_wrapper_end;
+
+					  // echo messages -------- end ---------------
+					 
+					 ?>
+	
 				 </div>
 				 <?php
 				 }
@@ -108,7 +165,7 @@ $fetch_current_contact_name=mysqli_fetch_assoc($read_contact_name);
 				<div class="type_sect" style="position:fixed;bottom:0;padding:20px;">
 
 					<form method="post" action="functions/send_message.func.php?contact_id=<?php echo $_GET['contact_id'];?>">
-
+ 
 						<textarea type="text" name="type-message" placeholder="Message..." style="padding:7px;width:300px;height:20px;overflow:auto;border:1px solid #ccc;float:left;"></textarea>
 						<input type="submit" name="send-btn" value="send" style="border:none;background:#2da2d8;color:#ffffff;padding:10px;width:100px;"/>
 					

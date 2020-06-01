@@ -1,5 +1,6 @@
 <?php
 include 'dbh.inc.php';
+
 class Insert_class extends Database{
 
 public function __construct(){
@@ -8,6 +9,7 @@ public function __construct(){
 
 
 }
+
 
 public function add_message($message,$sender_id,$reciever_id){
 
@@ -18,6 +20,13 @@ public function add_message($message,$sender_id,$reciever_id){
 
 
 
+}
+
+public function insert_new_user($firstname,$lastname,$username,$password){
+	
+	$query="Insert into tbl_users (fname,lname,username,password) values ('$firstname','$lastname','$username','$password')";
+	$result=mysqli_query($this->connection,$query);
+	return $result;
 }
 
 
