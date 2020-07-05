@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2020 at 07:53 PM
+-- Generation Time: Jul 05, 2020 at 03:10 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -41,33 +41,38 @@ CREATE TABLE `tbl_chat` (
 --
 
 INSERT INTO `tbl_chat` (`chat_id`, `message`, `sender_id`, `reciever_id`, `sent_on`) VALUES
-(36, 'hey hamilton! ', 1, 2, '2020-05-10 00:09:46'),
-(37, 'why ?', 2, 1, '2020-05-10 00:10:14'),
-(38, 'hello janno', 1, 3, '2020-05-10 00:10:41'),
-(39, 'hi', 3, 1, '2020-05-10 00:10:54');
+(63, 'hey max!', 20, 21, '2020-06-28 23:25:49'),
+(64, 'hello tf', 20, 22, '2020-06-28 23:26:10'),
+(65, 'hey hey hey!', 21, 20, '2020-06-28 23:26:36'),
+(66, 'yow!', 21, 23, '2020-06-28 23:26:43'),
+(67, ':D', 21, 22, '2020-06-28 23:26:48'),
+(68, 'hey max ', 23, 21, '2020-06-28 23:27:44'),
+(69, 'hahahah ', 23, 20, '2020-06-28 23:27:57');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_users`
+-- Table structure for table `tbl_chat_users`
 --
 
-CREATE TABLE `tbl_users` (
+CREATE TABLE `tbl_chat_users` (
   `user_id` int(11) NOT NULL,
   `fname` varchar(25) NOT NULL,
   `lname` varchar(25) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(250) NOT NULL
+  `password` varchar(250) NOT NULL,
+  `profile_image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_users`
+-- Dumping data for table `tbl_chat_users`
 --
 
-INSERT INTO `tbl_users` (`user_id`, `fname`, `lname`, `username`, `password`) VALUES
-(1, 'James', 'Bond', 'James', '123'),
-(2, 'alexander', 'hamilton', 'alexander', '123'),
-(3, 'janno', 'west', 'janno', '123');
+INSERT INTO `tbl_chat_users` (`user_id`, `fname`, `lname`, `username`, `password`, `profile_image`) VALUES
+(20, 'alj', 'code', 'al', '123', 'uploads/vector.jpg'),
+(21, 'max', 'payne', 'max', '123', 'uploads/max.png'),
+(22, 'twisted', 'fate', 'tf', '123', 'uploads/tf.jpg'),
+(23, 'alexander', 'hamilton', 'alex', '123', 'uploads/6b4caa5e-0b89-11ea-bf03-06551cb39bc6.jpg');
 
 --
 -- Indexes for dumped tables
@@ -80,9 +85,9 @@ ALTER TABLE `tbl_chat`
   ADD PRIMARY KEY (`chat_id`);
 
 --
--- Indexes for table `tbl_users`
+-- Indexes for table `tbl_chat_users`
 --
-ALTER TABLE `tbl_users`
+ALTER TABLE `tbl_chat_users`
   ADD PRIMARY KEY (`user_id`);
 
 --
@@ -93,13 +98,13 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_chat`
 --
 ALTER TABLE `tbl_chat`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
--- AUTO_INCREMENT for table `tbl_users`
+-- AUTO_INCREMENT for table `tbl_chat_users`
 --
-ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `tbl_chat_users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

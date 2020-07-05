@@ -34,7 +34,28 @@ $conn_getContact_name =new Select_class();
 $contact_name = $_GET['contact_id'];
 $read_contact_name =$conn_getContact_name->get_contact_name($contact_name);
 $fetch_current_contact_name=mysqli_fetch_assoc($read_contact_name);
+
+
+//search_contact
+if(isset($_POST['search-btn'])){
+	
+	$conn_search_contact = new Select_class();
+	$search_text= $_POST['search_contact'];
+	$read_all_contacts=$conn_search_contact->search_contact($search_text);
+	
+	if(mysqli_num_rows($read_all_contacts)>0){
+		
+		$read_all_contacts;
+	}
+		elseif(mysqli_num_rows($read_all_contacts)<=0) {
+		
+		$read_all_contacts=$conn_read_contacts->select_contacts();
+	}
+	
+}
 ?>
+
+
 <!Doctype html>
 <html>
 <head>
@@ -47,13 +68,13 @@ $fetch_current_contact_name=mysqli_fetch_assoc($read_contact_name);
   <div class="container">
   <div class="top-content">
 	<div class="logo">
-		<label style="font-size:24px;">UrFriends</label>
+		<label style="font-size:24px;">Ufriends</label>
 	</div>
 	<div class="user" style="text-align:right;">
   <?php
 
 
-	echo ucfirst($fetch_data['fname'])." ".ucfirst($fetch_data['lname']);
+	echo "<a href=edit_profile.php?user_id=".$current_user." style='text-decoration:none;color:#ffffff;'>" .ucfirst($fetch_data['fname'])." ".ucfirst($fetch_data['lname']). "</a>";
 	
 
  ?>
@@ -65,29 +86,36 @@ $fetch_current_contact_name=mysqli_fetch_assoc($read_contact_name);
  <div class="container2">
     <div class="chatapp-wrapper">
       <div class="side-panel">
-        <h2>Friends</h2><br>
+        <h2>Friends</h2>
 		<div class="search-section">
 		 <form method="Post" action="">
 		  <input type="text" class="search_friends" name="search_contact" placeholder="Search...">
-		  <input type="submit" name="search-btn" value="Find"/>
+		  <input type="submit" name="search-btn" class="search-friends-btn" value="Search"/>
 		</form>
 		</div>
+	
 	   <?php
 	      while($row=mysqli_fetch_assoc($read_all_contacts)){
 		?>
 	  <div class="contacts">
-        	<a href="index.php?contact_id=<?php echo $row['user_id'];?>"><?php echo ucfirst($row['fname'])." ".ucfirst($row['lname']);?></a>
+        	<a href="index.php?contact_id=<?php echo $row['user_id'];?>"><div class="contact_list"><?php echo "<img src='".$row['profile_image']."'  />";?><?php echo ucfirst($row['fname'])." ".ucfirst($row['lname']);?></div></a>
            </div>
 	   	<?php
 		}	
 		?>
       </div>
         <div class="chat-section">
-			 <h3>Chats
-			 <?php echo "<label style='color:#a5e1ff;font-size:16px;'>- ".$fetch_current_contact_name['fname']." ".$fetch_current_contact_name['lname']."</label>";?>
-			 </h3>
+		
+			
+			 <div class="current_chat">
+				<div class="current_chat_container">
+			 <?php echo "<img src='".$fetch_current_contact_name['profile_image']."'  />";?><?php echo " <label class='chat_name'>  ".ucfirst($fetch_current_contact_name['fname'])." ".ucfirst($fetch_current_contact_name['lname'])."</label>";?>
+				</div>
+				
+			 </div>
+			
 			 
-			 <div class="chats_wrapper" style="overflow-y:auto;border:0px solid yellow;height:365px;padding:5px;">
+			 <div class="chats_wrapper" id="chats_wrapper" style="overflow-y:auto;height:327px;padding:5px;">
 
 				 <?php
 				 while($fetch_message=mysqli_fetch_assoc($read_message)){
@@ -162,12 +190,13 @@ $fetch_current_contact_name=mysqli_fetch_assoc($read_contact_name);
 				 ?>
 				 	
 				</div><br>
-				<div class="type_sect" style="position:fixed;bottom:0;padding:20px;">
+				<div class="type_sect" style="position:absolute;bottom:0;padding:15px;height:auto;background:#ffffff;">
 
 					<form method="post" action="functions/send_message.func.php?contact_id=<?php echo $_GET['contact_id'];?>">
- 
-						<textarea type="text" name="type-message" placeholder="Message..." style="padding:7px;width:300px;height:20px;overflow:auto;border:1px solid #ccc;float:left;"></textarea>
-						<input type="submit" name="send-btn" value="send" style="border:none;background:#2da2d8;color:#ffffff;padding:10px;width:100px;"/>
+						<div class="textarea_message" style="border:none;border-radius:20px;overflow:hidden;float:left;background:#eee;">
+						<textarea type="text" name="type-message" placeholder="Message..." style="outline:none;background:#eee;resize:none;padding:8px;width:350px;height:20px;margin:3px;overflow:auto;border:none;"></textarea>
+						</div>
+						<input type="submit" name="send-btn" value="Send" style="border:none;border-radius:20px;background:#2da2d8;color:#ffffff;padding:10px;margin:3px;width:100px;"/>
 					
 					</form>
 				</div>
@@ -175,5 +204,12 @@ $fetch_current_contact_name=mysqli_fetch_assoc($read_contact_name);
     </div>	 
 	</div>
 </div>
+<script>
+// scroll to bottom of the chat 
+let chatHistory = document.getElementById("chats_wrapper");
+chatHistory.scrollTop = chatHistory.scrollHeight;
+// end
+
+</script>
 </body>
 </html>
